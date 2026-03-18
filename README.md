@@ -1,10 +1,10 @@
 # Clean Modular SaaS Starter Kit
 
-A lightweight, production-ready SaaS starter kit built with Next.js 15, TypeScript, Clerk, Resend, and shadcn/ui.
+A lightweight, production-ready SaaS starter kit built with Next.js 16, TypeScript, Clerk, Resend, and shadcn/ui.
 
 ## Features
 
-- **Next.js 15 (App Router)**: Fast, modern, and SEO-friendly.
+- **Next.js 16 (App Router)**: Fast, modern, and SEO-friendly.
 - **Clerk Authentication**: Social login, email/password, and session management.
 - **Resend Emails**: Easy transactional email integration.
 - **shadcn/ui**: Accessible, customizable components.
