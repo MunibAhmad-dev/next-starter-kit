@@ -1,29 +1,88 @@
-# Create T3 App
+# Clean Modular SaaS Starter Kit
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A lightweight, production-ready SaaS starter kit built with Next.js 15, TypeScript, Clerk, Resend, and shadcn/ui.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Next.js 15 (App Router)**: Fast, modern, and SEO-friendly.
+- **Clerk Authentication**: Social login, email/password, and session management.
+- **Resend Emails**: Easy transactional email integration.
+- **shadcn/ui**: Accessible, customizable components.
+- **Tailwind CSS 4.0**: Utility-first styling with modern features.
+- **Modular Architecture**: Isolated modules for auth, email, and ui for maximum reusability.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Project Structure
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+```text
+/src
+  /app          # Next.js App Router (pages & layouts)
+  /components   # Shared React components
+  /modules      # Domain-specific modules
+    /auth       # Authentication logic & wrappers
+    /email      # Resend utility & templates
+    /ui         # shadcn/ui library & custom components
+  /lib          # Core utilities & configurations
+  /config       # Global constants & environment config
+```
 
-## Learn More
+## Getting Started
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### 1. Clone the repository
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```bash
+git clone <repository-url>
+cd starter-kit
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### 2. Install dependencies
 
-## How do I deploy this?
+```bash
+npm install
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### 3. Environment Setup
+
+Copy `.env.example` to `.env` and fill in your keys:
+
+```bash
+cp .env.example .env
+```
+
+**Required Keys:**
+- [Clerk API Keys](https://clerk.com)
+- [Resend API Key](https://resend.com)
+
+### 4. Run locally
+
+```bash
+npm run dev
+```
+
+Your app is now running at `http://localhost:3000`!
+
+## How to use
+
+### Authentication
+
+Routes inside `/dashboard` are automatically protected. Use the `clerkMiddleware` in `src/middleware.ts` to customize protection.
+
+### Sending Emails
+
+Use the `sendEmail` utility from `@/modules/email/resend`:
+
+```typescript
+import { sendEmail } from '@/modules/email/resend';
+
+await sendEmail({
+  to: 'user@example.com',
+  subject: 'Welcome!',
+  html: '<p>Welcome to our platform!</p>',
+});
+```
+
+## Documentation
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Clerk Documentation](https://clerk.com/docs)
+- [shadcn/ui Documentation](https://ui.shadcn.com)
+- [Resend Documentation](https://resend.com/docs)
