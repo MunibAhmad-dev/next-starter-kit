@@ -19,7 +19,7 @@ export default function LandingPage() {
             <Link href="/dashboard">Get Started</Link>
           </Button>
           <Button size="lg" variant="outline" className="rounded-full px-8">
-            <Link href="https://github.com">View on GitHub</Link>
+            <Link href="https://github.com/MunibAhmad-dev/next-starter-kit">View on GitHub</Link>
           </Button>
         </div>
       </header>
