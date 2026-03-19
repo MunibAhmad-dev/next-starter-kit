@@ -1,17 +1,21 @@
 # Clean Modular SaaS Starter Kit
 
-A lightweight, production-ready SaaS starter kit built with Next.js 16, TypeScript, Clerk, Resend, and shadcn/ui.
+A lightweight, production-ready SaaS starter kit built with Next.js 16, TypeScript, Clerk, Resend, shadcn/ui, and  Lago billing.
 
-## Features
+---
 
-- **Next.js 16 (App Router)**: Fast, modern, and SEO-friendly.
-- **Clerk Authentication**: Social login, email/password, and session management.
-- **Resend Emails**: Easy transactional email integration.
-- **shadcn/ui**: Accessible, customizable components.
-- **Tailwind CSS 4.0**: Utility-first styling with modern features.
-- **Modular Architecture**: Isolated modules for auth, email, and ui for maximum reusability.
+## 🚀 Features
 
-## Project Structure
+- **Next.js 16 (App Router)**: Fast, modern, and scalable
+- **Clerk Authentication**: Secure login, signup, and session management
+- **Resend Emails**: Simple transactional email integration
+- **shadcn/ui + Tailwind CSS**: Clean, accessible UI components
+- **Modular Architecture**: Easy to extend and reuse across projects
+- ** Billing (Lago)**: Ready-to-enable billing system
+
+---
+
+## 📁 Project Structure
 
 ```text
 /src
@@ -20,69 +24,180 @@ A lightweight, production-ready SaaS starter kit built with Next.js 16, TypeScri
   /modules      # Domain-specific modules
     /auth       # Authentication logic & wrappers
     /email      # Resend utility & templates
-    /ui         # shadcn/ui library & custom components
-  /lib          # Core utilities & configurations
-  /config       # Global constants & environment config
-```
-
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone <repository-url>
+    /ui         # UI components (shadcn/ui)
+    /billing    #  Lago billing integration
+  /lib          # Core utilities
+  /config       # Global configs
+⚙️ Getting Started
+1. Clone the repository
+git clone https://github.com/MunibAhmad-dev/next-starter-kit
 cd starter-kit
-```
-
-### 2. Install dependencies
-
-```bash
+2. Install dependencies
 npm install
-```
+3. Environment Setup
 
-### 3. Environment Setup
+Copy .env.example to .env:
 
-Copy `.env.example` to `.env` and fill in your keys:
-
-```bash
 cp .env.example .env
-```
 
-**Required Keys:**
-- [Clerk API Keys](https://clerk.com)
-- [Resend API Key](https://resend.com)
+Add your keys:
 
-### 4. Run locally
+Clerk (Auth)
 
-```bash
+Resend (Email)
+
+Lago (Optional billing)
+
+4. Run locally
 npm run dev
-```
 
-Your app is now running at `http://localhost:3000`!
+👉 App runs at:
+http://localhost:3000
 
-## How to use
+🔐 Authentication (Clerk)
 
-### Authentication
+Pre-configured auth system
 
-Routes inside `/dashboard` are automatically protected. Use the `clerkMiddleware` in `src/middleware.ts` to customize protection.
+Protected routes (e.g. /dashboard)
 
-### Sending Emails
+Easy to extend
 
-Use the `sendEmail` utility from `@/modules/email/resend`:
+📧 Email (Resend)
 
-```typescript
+Use:
+
 import { sendEmail } from '@/modules/email/resend';
 
 await sendEmail({
   to: 'user@example.com',
   subject: 'Welcome!',
-  html: '<p>Welcome to our platform!</p>',
+  html: '<p>Hello!</p>',
 });
-```
+💳  Lago Billing  
 
-## Documentation
+Lago is included as an optional module for billing and usage-based pricing.
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Clerk Documentation](https://clerk.com/docs)
-- [shadcn/ui Documentation](https://ui.shadcn.com)
-- [Resend Documentation](https://resend.com/docs)
+👉 Official Docs:
+https://doc.getlago.com/guide/lago-self-hosted/docker
+
+🐳 Option 1: Quick Setup (Recommended for testing)
+
+Make sure:
+
+Docker is installed
+
+Docker Desktop is running
+
+Run:
+make sure to  clone the repo https://github.com/getlago/lago
+ cd lago
+ then run this
+
+docker run -d --name lago -p 80:80 -p 3001:3000 getlago/lago:latest
+✅ Access Lago
+
+Frontend: http://localhost
+
+API: http://localhost:3001
+
+🔑 Setup Steps
+
+Open: http://localhost
+
+Sign up (create organization)
+
+Go to Developers → API Keys
+
+Copy API key
+
+🔗 Add to your project .env
+LAGO_API_URL=http://localhost:3001
+LAGO_API_KEY=your_api_key_here
+🧪 Test Billing Integration
+
+You can test via API route:
+
+http://localhost:3000/api/test-billing
+🧠 Note
+
+Lago is 
+
+Only basic integration is included
+
+Full billing system (subscriptions, usage tracking) can be added later
+
+🐳 Option 2: Advanced Setup (Full Control)
+
+If you want full control:
+
+git clone https://github.com/getlago/lago
+cd lago
+git fetch --tags
+git checkout $(git describe --tags --abbrev=0)
+Setup environment
+echo "LAGO_RSA_PRIVATE_KEY=\"$(openssl genrsa 2048 | base64 | tr -d '\n')\"" >> .env
+source .env
+Run Lago
+docker compose up
+
+👉 Access:
+
+Frontend: http://localhost
+
+API: http://localhost:3000
+ (default)
+
+⚠️ If your Next.js app is running on 3000, use:
+
+API_PORT=3001
+📌 Important Notes
+
+Lago has its own .env file inside its folder
+
+This is separate from your main project .env
+
+Do not mix them
+
+🐳 Docker (Starter Kit)
+
+Run full app with Docker:
+
+docker-compose up --build
+🔄 CI/CD (Basic)
+
+Basic GitHub Actions included for:
+
+install
+
+build verification
+
+👉 Can be extended for deployment later
+
+📚 Documentation
+
+Next.js: https://nextjs.org/docs
+
+Clerk: https://clerk.com/docs
+
+Resend: https://resend.com/docs
+
+shadcn/ui: https://ui.shadcn.com
+
+Lago: https://doc.getlago.com
+
+🧠 Philosophy
+
+This starter kit is designed to be:
+
+✅ Lightweight
+
+✅ Modular
+
+✅ Easy to extend
+
+👉 Add features (billing, analytics, etc.) as modules — not core dependencies.
+
+
+---
+
+```md
